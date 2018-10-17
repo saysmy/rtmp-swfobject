@@ -5,12 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>rtmp测试</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #player{
+            width: 500px;
+            height: 500px;
+            position: relative;
+        }
+        //no flash hint
+        .no_flash{
+            background: #000;width: 100%;height: 100%;position: absolute;top:0px;left:0px; color: #fff;text-align: center;
+        }
+        .no_flash p{
+            position: absolute;top: 50%;left: 0;margin-top: -24px;margin-bottom: 0;width: 100%;height: 48px;line-height: 24px;
+            text-align: center;
+        }
+        .no_flash p a{    
+            display: inline-block;margin-left: 5px;margin-right: 5px;width: 40px;line-height: 20px;color: #fff;text-decoration: none;background-color: #ff0071;
+            text-align: center;
+        }
+        .hide{display: none;}
+    </style>
 </head>
 <body>
-    <div id="player"></div>
+    <div id="player">
+        <!--未开启flash的提示-->
+        <div class="no_flash hide">
+            <p>您需要安装Flash Player后才能观看精彩直播～
+                <br>请您
+                <a target="_blank" href="//www.adobe.com/go/getflashplayer_cn">安装</a>后刷新本页面
+            </p>
+        </div>
+    </div>
     <script src="swfobject.js"></script>
     <script>
-        playerRoom()
+    var hasFlash = has_flash();
+    if(!hasFlash){
+        document.querySelector('.no_flash').style.display = 'block'
+    }
+    function has_flash(){
+        var isIE = !-[1,];
+        if(isIE){
+            try{
+                return !!new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+             }
+            catch(e){         
+            }
+        }
+        else {
+            try{         
+                return !!navigator.plugins['Shockwave Flash'];
+            }
+            catch(e){          
+            }
+        }
+        return false;
+    }
+    
+    playerRoom()
     function playerRoom () {
         createPlayerSWF('player', {
             bufferTime:1,
@@ -20,7 +71,7 @@
             videoWidth : 500,
             videoHeight : 500,
             rtmpPushUrl: 'xxx',
-            rtmpPullUrl: 'rtmp://9180.liveplay.myqcloud.com/live/9180_783283'
+            rtmpPullUrl: 'rtmp://9180.liveplay.myqcloud.com/live/9180_259463'
         }, {
           width : 500, 
           height : 500,
