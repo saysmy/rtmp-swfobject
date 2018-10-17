@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>rtmp测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id="player"></div>
+    <script src="swfobject.js"></script>
+    <script>
+        playerRoom()
+    function playerRoom () {
+        createPlayerSWF('player', {
+            bufferTime:1,
+            isModerator : false,
+            isPlaying : true,
+            headPic: 'xx',
+            videoWidth : 500,
+            videoHeight : 500,
+            rtmpPushUrl: 'xxx',
+            rtmpPullUrl: 'rtmp://9180.liveplay.myqcloud.com/live/9180_783283'
+        }, {
+          width : 500, 
+          height : 500,
+          allowFullScreen : false
+        });
+        
+    }
+
+    function createPlayerSWF(placehoder, flashvars, attributes){
+        var swfVersionStr = "11.1.0";
+        var xiSwfUrlStr = "playerProductInstall.swf";
+        var params = {};
+        params.wmode = "transparent";
+        params.quality = "high";
+        params.bd = "2000000";
+        attributes.id = placehoder;
+        attributes.name = placehoder;   
+        attributes.align = "middle";
+        swfobject.embedSWF('./video.swf', placehoder, attributes.width, attributes.height, swfVersionStr, xiSwfUrlStr, flashvars, params, attributes);
+    }
+    </script>
+</body>
+</html>
